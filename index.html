@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AfeefaRockPaperScissors</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&display=swap');
+
+
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&display=swap');
+
+
+* {
+  box-sizing: border-box;
+}
+h1{
+font-family: 'Playfair Display', serif;
+text-shadow : 1px 1px grey;
+text-align : center ;
+}
+h2, h3{
+font-family: 'Playfair Display', serif;
+}
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-image: url("https://cdn.pixabay.com/photo/2018/03/13/22/53/puzzle-3223941_1280.jpg");
+  background-size: cover;
+    min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Float four columns side by side */
+.column {
+  float: left;
+  width: 25%;
+  padding: 0 10px;
+}
+
+/* Remove extra left and right margins, due to padding */
+.row {margin: 0 -5px;}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive columns */
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+    display: block;
+    margin-bottom: 20px;
+  }
+}
+button{
+color : #ff00ff;
+}
+span{
+color : #ff99ff;
+}
+#result{
+color : #660066;
+}
+/* Style the counter cards */
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  text-align: center;
+  background-color: #f1f1f1;
+}
+footer {
+  margin-top: auto;
+}
+
+</style>
+</head>
+<body>
+
+<h1>Rock-Paper-Scissors</h1>
+<hr><br><br>
+
+<div class="row">
+  <div class="column">
+    <div class="card">
+      
+      <h2>Computer Choice: <h4><span id="computer-choice"></span></h4></h2>
+    </div>
+  </div>
+
+  <div class="column">
+    <div class="card">
+     
+      <h2>Your Choice:<h4> <span id="user-choice"></span></h4></h2>
+    </div>
+  </div>
+  
+  <div class="column">
+    <div class="card">
+      
+   	  <h2>Result:<h4> <span id="result"></span></h4></h2>
+    </div>
+  </div>
+  
+  <div class="column">
+    <div class="card">
+      
+      <button id="rock">rock</button>
+      <button id="paper">paper</button>
+      <button id="scissors">scissors</button>
+    </div>
+  </div>
+</div>
+
+<footer>
+Made with <span style="color: #e25555;">❤</span> by Afeefa
+</footer>
+
+
+<script type="text/javascript">
+const computerChoiceDisplay = document.getElementById('computer-choice')
+const userChoiceDisplay = document.getElementById('user-choice')
+const resultDisplay = document.getElementById('result')
+const possibleChoices = document.querySelectorAll('button')
+let userChoice
+let computerChoice
+let result
+
+possibleChoices.forEach(possibleChoice => possibleChoice.addEventListener('click', (e) => {
+  userChoice = e.target.id
+  userChoiceDisplay.innerHTML = userChoice
+  generateComputerChoice()
+  getResult()
+}))
+
+function generateComputerChoice() {
+  const randomNumber = Math.floor(Math.random() * 3) + 1 // or you can use possibleChoices.length
+  
+  if (randomNumber === 1) {
+    computerChoice = 'rock'
+  }
+  if (randomNumber === 2) {
+    computerChoice = 'scissors'
+  }
+  if (randomNumber === 3) {
+    computerChoice = 'paper'
+  }
+  computerChoiceDisplay.innerHTML = computerChoice
+}
+
+function getResult() {
+  if (computerChoice === userChoice) {
+    result = 'its a draw!'
+  }
+  if (computerChoice === 'rock' && userChoice === "paper") {
+    result = 'you win!'
+  }
+  if (computerChoice === 'rock' && userChoice === "scissors") {
+    result = 'you lost!'
+  }
+  if (computerChoice === 'paper' && userChoice === "scissors") {
+    result = 'you win!'
+  }
+  if (computerChoice === 'paper' && userChoice === "rock") {
+    result = 'you lose!'
+  }
+  if (computerChoice === 'scissors' && userChoice === "rock") {
+    result = 'you win!'
+  }
+  if (computerChoice === 'scissors' && userChoice === "paper") {
+    result = 'you lose!'
+  }
+  resultDisplay.innerHTML = result
+}
+
+</script>
+</body>
+</html>
